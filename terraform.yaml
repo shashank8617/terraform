@@ -1,0 +1,46 @@
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "AKIARPL2F63JCEKORSUG"
+  secret_key = "CQ3scx+c6YhW1ckx11FJU/rONAqP5pVTkB9Slgny"
+}
+
+resource "aws_vpc" "example" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "example_public" {
+  vpc_id     = "vpc-0c0df968e4dd60532"
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_security_group" "example_sg" {
+  vpc_id = "vpc-0c0df968e4dd60532"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "example-1" {
+  ami             = "ami-0187337106779cdf8"
+  instance_type   = "t2.micro"
+  key_name        = "shashank"
+  count           = 1
+  subnet_id       = "subnet-0ff77d87097016ced"
+  security_groups = [aws_security_group.example_sg.id]
+
+ user_data = <<-EOF
+              #!/bin/bash
+              sudo yum install -y httpd
+              sudo systemctl start httpd
+              sudo systemctl enable httpd
+              EOF
+
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
