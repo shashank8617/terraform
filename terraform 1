@@ -1,0 +1,280 @@
+DOCKER
+
+sudo yum update -y
+sudo yum search docker
+sudo yum info docker
+sudo yum install -y docker
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo systemctl status docker.service
+docker --version
+
+DOCKER FILE 
+
+FROM amazonlinux
+MAINTAINER shashank.karigowda@gmail.com
+RUN yum update -y
+RUN yum install wget -y
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.86/bin/apache-tomcat-9.0.86.tar.gz
+RUN yum install tar -y
+RUN yum install gzip -y
+RUN tar -zxvf apache-tomcat-9.0.86.tar.gz
+RUN yum install java-11* -y
+RUN sh apache-tomcat-9.0.86/bin/startup.sh
+
+//cmd to run the file docker build -t shashank8617/webapp Dockerfile/
+
+DOCKER COMPOSE 
+
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - '4000:80'
+  db:
+    image: redis
+
+
+YML
+
+.yml (script)
+
+version:'3'
+services:
+  web:
+    images:nginx
+  ports:
+    -4000:80
+  db:
+    image:redis
+
+JENKINS
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install fontconfig java-17-openjdk
+sudo yum install jenkins
+sudo systemctl daemon-reload
+
+
+
+
+
+
+
+
+
+
+  secret_key = "eGn4QluGGht6rcHglu58W870jO7YYuuODvgXoh8V"
+}
+
+resource "aws_vpc" "example" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "example_public" {
+  vpc_id     = aws_vpc.example.id
+  cidr_block = "10.0.1.0/24"
+}
+
+resource "aws_security_group" "example_sg" {
+  vpc_id = aws_vpc.provider "aws" {
+  region = "ap-south-1"
+  access_key = "AKIARPL2F63JH305JEL4"
+  secret_key = "eGn4QluGGht6rcHglu58W870jO7YYuuODvgXoh8V"
+}
+
+resource "aws_vpc" "example" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "example_public" {
+  vpc_id     = aws_vpc.subnet-0ff77d87097016ced
+  cidr_block = "10.0.1.0/24"
+}
+
+resource "aws_security_group" "sg" {
+  vpc_id = aws_vpc.vpc-0c0df968e4dd60532
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+-- INSERT --                                                                                                                                32,32          4%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "AKIARPL2F63JH305JEL4"
+  secret_key = "eGn4QluGGht6rcHglu58W870jO7YYuuODvgXoh8V"
+}
+
+resource "aws_vpc" "example" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "example_public" {
+  vpc_id     = "vpc-0c0df968e4dd60532"
+  cidr_block = "10.0.1.0/24"
+}
+
+resource "aws_security_group" "example_sg" {
+  vpc_id = "vpc-0c0df968e4dd60532"
+  
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "example-1" {
+  ami             = "ami-0187337106779cdf8"
+  instance_type   = "t2.micro"
+  key_name        = "shashank"
+  count           = 1
+  subnet_id       = "subnet-0ff77d87097016ced"
+  security_groups = ["aws_security_group"]
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum install -y httpd",
+      "sudo systemctl start httpd",
+      "sudo systemctl enable httpd"
+    ]
+  }
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "AKIARPL2F63JCEKORSUG"
+  secret_key = "CQ3scx+c6YhW1ckx11FJU/rONAqP5pVTkB9Slgny"
+}
+
+resource "aws_vpc" "example" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "example_public" {
+  vpc_id     = "vpc-0c0df968e4dd60532"
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_security_group" "example_sg" {
+  vpc_id = "vpc-0c0df968e4dd60532"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "example-1" {
+  ami             = "ami-0187337106779cdf8"
+  instance_type   = "t2.micro"
+  key_name        = "shashank"
+  count           = 1
+  subnet_id       = "subnet-0ff77d87097016ced"
+  security_groups = [aws_security_group.example_sg.id]
+
+ user_data = <<-EOF
+              #!/bin/bash
+              sudo yum install -y httpd
+              sudo systemctl start httpd
+              sudo systemctl enable httpd
+              EOF
+
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+           
+
+                                                                                                                                            1,1           Top
