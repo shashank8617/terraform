@@ -1,4 +1,4 @@
-# teraform script
+# terraform script
 
 provider "aws" {
   region = "ap-south-1"  
