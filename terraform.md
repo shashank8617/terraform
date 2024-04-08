@@ -1,5 +1,5 @@
 # terraform script
-
+```bash
 provider "aws" {
   region = "ap-south-1"  
   access_key = "AKIA4T74ACGVL7RY4V56"
